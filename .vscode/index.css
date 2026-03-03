@@ -95,7 +95,7 @@ h3,
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('./banner/image.png');
+    background-image: url('./image.png');
     background-size: cover;
     background-position: center top;
 }
