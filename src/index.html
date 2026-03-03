@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiftCart — Best Collection For You</title>
+
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Google Fonts: Syne (headings) + DM Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./index.css">
+
+
+</head>
+
+<body class="bg-white w-full overflow-x-hidden">
+
+    <!-- ═══════════════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════════════ -->
+    <header class="site-header sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
+
+            <!-- LEFT: Hamburger + Logo -->
+            <div class="flex items-center gap-2">
+
+                <!-- Hamburger (mobile only) -->
+                <div class="dropdown lg:hidden">
+                    <button tabindex="0" class="btn btn-ghost btn-sm btn-circle" aria-label="Open menu" aria-expanded="false" id="mobileMenuBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+                    <ul id="mobileNavLinks" tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[999] p-2 shadow-lg bg-white rounded-xl w-48 border border-gray-100">
+                        <li><a href="#home" class="nav-link rounded-lg">Home</a></li>
+                        <li><a href="#about" class="nav-link rounded-lg">About</a></li>
+                        <li><a href="#products" class="nav-link rounded-lg">Products</a></li>
+                        <li><a href="#contact" class="nav-link rounded-lg">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-1.5 text-xl font-bold brand-font text-blue-600 hover:text-blue-700 transition-colors" aria-label="SwiftCart home">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg> SwiftCart
+                </a>
+            </div>
+
+            <!-- CENTER: Desktop nav -->
+            <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+                <ul id="navLinks" class="flex items-center gap-1 list-none m-0 p-0">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- RIGHT: Icons -->
+            <div class="flex items-center gap-1">
+
+                <!-- Wishlist -->
+                <button id="wishlistBtn" class="btn btn-ghost btn-sm btn-circle relative" aria-label="My wishlist" title="My Wishlist">
+          <i class="fa-solid fa-heart text-base" aria-hidden="true"></i>
+          <span id="wishlistCount" class="absolute -top-0.5 -right-0.5 bg-pink-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none hidden">0</span>
+        </button>
+
+                <!-- User menu -->
+                <div class="dropdown dropdown-end">
+                    <button id="userMenuBtn" class="btn btn-ghost btn-sm btn-circle" aria-label="User menu" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-user text-base" aria-hidden="true"></i>
+          </button>
+                    <ul id="userDropdownMenu" class="dropdown-content z-[100] menu p-2 shadow-lg bg-white rounded-xl w-48 border border-gray-100 mt-2">
+                        <li><a id="ordersLink" href="#" class="rounded-lg text-sm"><i class="fa-solid fa-receipt mr-2" aria-hidden="true"></i>My Orders</a></li>
+                        <li><a id="logoutLink" href="#" class="hidden rounded-lg text-sm text-red-500"><i class="fa-solid fa-sign-out-alt mr-2" aria-hidden="true"></i>Logout</a></li>
+                        <li><a id="loginLink" href="#" class="rounded-lg text-sm"><i class="fa-solid fa-sign-in-alt mr-2" aria-hidden="true"></i>Login</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cart -->
+                <div class="dropdown dropdown-end">
+                    <button tabindex="0" class="btn btn-ghost btn-sm btn-circle relative" aria-label="Shopping cart" aria-haspopup="true">
+            <i class="fa-solid fa-bag-shopping text-base" aria-hidden="true"></i>
+            <span id="cartCount" class="absolute -top-0.5 -right-0.5 bg-blue-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">0</span>
+          </button>
+
+                    <!-- Cart Dropdown -->
+                    <div tabindex="0" class="dropdown-content card card-compact w-72 bg-white shadow-2xl mt-3 z-50 rounded-2xl border border-gray-100">
+                        <div class="card-body p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span id="cartItemsText" class="font-bold text-base brand-font">0 Items</span>
+                                <span id="cartDeliveryText" class="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">Delivery: $0</span>
+                            </div>
+                            <div id="cartList" class="space-y-2 max-h-52 overflow-y-auto sc-scroll pr-0.5"></div>
+                            <div class="pt-3 border-t border-gray-100 mt-3">
+                                <div class="flex justify-between text-sm mb-3">
+                                    <span class="text-gray-500">Subtotal</span>
+                                    <span id="cartSubtotalText" class="font-semibold text-blue-600">$0.00</span>
+                                </div>
+                                <button id="viewCartBtn" class="btn btn-brand w-full text-sm">
+                  <i class="fa-solid fa-bag-shopping mr-1.5" aria-hidden="true"></i>View Cart
+                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════ -->
+    <section id="home" class="hero-section flex items-center justify-center lg:justify-start">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+
+        <div class="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 py-20 text-white">
+            <div class="max-w-xl">
+                <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span> New Arrivals Available
+                </span>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-5 brand-font">
+                    Best Collection<br/>
+                    <span class="text-blue-300">For You</span>
+                </h1>
+
+                <p class="text-white/75 text-base sm:text-lg leading-relaxed mb-8 max-w-md">
+                    Discover the latest trends in fashion, electronics, and more. Shop with confidence and style at SwiftCart.
+                </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <button id="heroShopBtn" class="btn btn-brand text-base px-7 py-3 rounded-xl shadow-lg shadow-blue-900/30">
+            Shop Now <i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
+          </button>
+                    <button id="heroAboutBtn" class="btn text-white border border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl text-base px-6 py-3 transition">
+            Learn More
+          </button>
+                </div>
+
+                <div class="flex items-center gap-6 mt-10">
+                    <div class="text-center">
+                        <p class="text-2xl font-bold brand-font">200+</p>
+                        <p class="text-white/60 text-xs mt-0.5">Products</p>
+                    </div>
+                    <div class="w-px h-10 bg-white/20"></div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold brand-font">50K+</p>
+                        <p class="text-white/60 text-xs mt-0.5">Happy Customers</p>
+                    </div>
+                    <div class="w-px h-10 bg-white/20"></div>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold brand-font">4.9★</p>
+                        <p class="text-white/60 text-xs mt-0.5">Avg Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       WHY CHOOSE US
+  ═══════════════════════════════════════════════════════ -->
+    <section id="about" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 text-sm font-semibold uppercase tracking-widest">Our Promise</span>
+                <h2 class="section-title text-2xl sm:text-3xl mt-2">Why Choose SwiftCart?</h2>
+                <p class="text-gray-500 text-sm sm:text-base mt-3 max-w-md mx-auto">
+                    We provide the best shopping experience with top-notch services and transparent pricing.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-truck" aria-hidden="true"></i></div>
+                    <h3 class="font-bold text-base mb-1.5">Free Delivery</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Orders over $50 ship free to your doorstep — fast and tracked.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
+                    <h3 class="font-bold text-base mb-1.5">24/7 Support</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Our team is always here. Reach us via chat, email, or phone anytime.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></div>
+                    <h3 class="font-bold text-base mb-1.5">Secure Payment</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">256-bit encryption protects every transaction you make with us.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></div>
+                    <h3 class="font-bold text-base mb-1.5">Easy Returns</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">30-day hassle-free returns — no questions asked.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       MAIN — Products
+  ═══════════════════════════════════════════════════════ -->
+    <main id="products" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+
+        <!-- Trending -->
+        <section class="mb-14" aria-labelledby="trending-title">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-1 h-7 bg-blue-600 rounded-full" aria-hidden="true"></span>
+                <h2 id="trending-title" class="section-title">Trending Now 🔥</h2>
+            </div>
+            <div id="trendingGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
+
+        <!-- Categories -->
+        <section class="mb-8" aria-labelledby="categories-title">
+            <h2 id="categories-title" class="section-title mb-4">Browse Categories</h2>
+            <div id="categoryButtons" class="flex flex-wrap gap-2" role="list" aria-label="Product categories"></div>
+        </section>
+
+        <!-- Search & Sort -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+            <div class="flex-1 relative">
+                <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none" aria-hidden="true"></i>
+                <input id="searchInput" type="search" placeholder="Search products by title or category…" class="input input-bordered w-full pl-10 text-sm rounded-xl focus:border-blue-500" aria-label="Search products" />
+            </div>
+            <select id="sortDropdown" class="select select-bordered w-full sm:w-44 text-sm rounded-xl" aria-label="Sort products">
+        <option value="default">Sort By</option>
+        <option value="price-low">Price: Low → High</option>
+        <option value="price-high">Price: High → Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+        </div>
+
+        <!-- Products header -->
+        <div class="flex items-center justify-between mb-5">
+            <h2 id="productsTitle" class="section-title text-lg">All Products</h2>
+            <p id="countText" class="text-sm text-gray-400" aria-live="polite"></p>
+        </div>
+
+        <!-- Products grid -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" role="list" aria-label="Product listings"></div>
+
+        <!-- Skeleton loader -->
+        <div id="skeletonLoader" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" aria-busy="true" aria-label="Loading products">
+            <!-- 6 skeletons for a fuller initial load feel -->
+            <div class="product-card">
+                <div class="card-img-wrap">
+                    <div class="skeleton-shimmer w-full h-32"></div>
+                </div>
+                <div class="card-body gap-2">
+                    <div class="skeleton-shimmer h-3 w-20 rounded-full"></div>
+                    <div class="skeleton-shimmer h-4 w-full"></div>
+                    <div class="skeleton-shimmer h-4 w-4/5"></div>
+                    <div class="skeleton-shimmer h-5 w-16 mt-1"></div>
+                    <div class="flex gap-2 mt-3">
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="card-img-wrap">
+                    <div class="skeleton-shimmer w-full h-32"></div>
+                </div>
+                <div class="card-body gap-2">
+                    <div class="skeleton-shimmer h-3 w-24 rounded-full"></div>
+                    <div class="skeleton-shimmer h-4 w-full"></div>
+                    <div class="skeleton-shimmer h-4 w-3/4"></div>
+                    <div class="skeleton-shimmer h-5 w-16 mt-1"></div>
+                    <div class="flex gap-2 mt-3">
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card hidden sm:flex flex-col">
+                <div class="card-img-wrap">
+                    <div class="skeleton-shimmer w-full h-32"></div>
+                </div>
+                <div class="card-body gap-2">
+                    <div class="skeleton-shimmer h-3 w-20 rounded-full"></div>
+                    <div class="skeleton-shimmer h-4 w-full"></div>
+                    <div class="skeleton-shimmer h-4 w-5/6"></div>
+                    <div class="skeleton-shimmer h-5 w-16 mt-1"></div>
+                    <div class="flex gap-2 mt-3">
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                        <div class="skeleton-shimmer h-9 flex-1 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No products state -->
+        <div id="noProductsState" class="text-center py-16 hidden" role="status">
+            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-search text-3xl text-gray-300" aria-hidden="true"></i>
+            </div>
+            <p class="text-xl font-semibold text-gray-600 mb-1">No products found</p>
+            <p class="text-gray-400 text-sm mb-5">Try adjusting your search or filter</p>
+            <button id="clearSearchBtn" class="btn btn-brand px-6">Clear Search</button>
+        </div>
+
+    </main>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       TOAST CONTAINER
+  ═══════════════════════════════════════════════════════ -->
+    <div id="toastContainer" class="fixed bottom-5 right-4 space-y-2 z-[10000] pointer-events-none" aria-live="polite" aria-atomic="false"></div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       PRODUCT DETAILS MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <div id="modalBackdrop" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-40" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="bg-white max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+                <h3 id="modalTitle" class="font-bold text-lg brand-font">Product Details</h3>
+                <button id="modalClose" class="btn btn-ghost btn-sm btn-circle text-xl hover:bg-gray-100" aria-label="Close product details">&times;</button>
+            </div>
+            <div id="modalBody" class="p-6"></div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       WISHLIST MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <dialog id="wishlistModal" class="modal" aria-labelledby="wishlistTitle">
+        <div class="modal-box w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto sc-scroll">
+            <div class="modal-header">
+                <h2 id="wishlistTitle" class="text-2xl font-bold brand-font">My Wishlist</h2>
+                <button class="btn btn-sm btn-circle btn-ghost" id="closeWishlistModal" aria-label="Close wishlist">✕</button>
+            </div>
+            <div id="wishlistModalContent" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            <div id="emptyWishlistState" class="text-center py-14 hidden">
+                <div class="w-20 h-20 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-heart text-3xl text-pink-300" aria-hidden="true"></i>
+                </div>
+                <p class="text-lg font-semibold text-gray-600 mb-1">Your wishlist is empty</p>
+                <p class="text-gray-400 text-sm mb-5">Save items you love to find them later</p>
+                <button class="btn btn-brand px-6" id="wishlistContinueBtn">Continue Shopping</button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button aria-label="Close">close</button></form>
+    </dialog>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       LOGIN MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <dialog id="loginModal" class="modal" aria-labelledby="loginTitle">
+        <div class="modal-box w-11/12 max-w-md">
+            <div class="modal-header">
+                <h2 id="loginTitle" class="text-2xl font-bold brand-font">Sign In</h2>
+                <button class="btn btn-sm btn-circle btn-ghost" id="closeLoginModal" aria-label="Close sign in">✕</button>
+            </div>
+
+            <form id="loginForm" class="space-y-4" novalidate>
+                <div class="form-control">
+                    <label class="label pt-0" for="loginName"><span class="label-text font-semibold text-sm">Full Name <span class="text-red-500">*</span></span></label>
+                    <input type="text" id="loginName" name="name" placeholder="Your name" class="input input-bordered w-full text-sm rounded-xl" required autocomplete="name" />
+                    <span class="text-red-500 text-xs mt-1 hidden" id="loginNameError">Please enter your name.</span>
+                </div>
+                <div class="form-control">
+                    <label class="label pt-0" for="loginEmail"><span class="label-text font-semibold text-sm">Email Address <span class="text-red-500">*</span></span></label>
+                    <input type="email" id="loginEmail" name="email" placeholder="your@email.com" class="input input-bordered w-full text-sm rounded-xl" required autocomplete="email" />
+                    <span class="text-red-500 text-xs mt-1 hidden" id="loginEmailError">Please enter a valid email.</span>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" class="btn btn-outline flex-1 rounded-xl" id="cancelLoginBtn">Cancel</button>
+                    <button type="submit" class="btn btn-brand flex-1 rounded-xl">Sign In</button>
+                </div>
+            </form>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button aria-label="Close">close</button></form>
+    </dialog>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       MY ORDERS MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <dialog id="ordersModal" class="modal" aria-labelledby="ordersTitle">
+        <div class="modal-box w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto sc-scroll">
+            <div class="modal-header">
+                <h2 id="ordersTitle" class="text-2xl font-bold brand-font">My Orders</h2>
+                <button class="btn btn-sm btn-circle btn-ghost" id="closeOrdersModal" aria-label="Close orders">✕</button>
+            </div>
+            <div id="ordersListContent" class="space-y-4"></div>
+            <div id="emptyOrdersState" class="text-center py-14 hidden">
+                <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-box text-3xl text-blue-300" aria-hidden="true"></i>
+                </div>
+                <p class="text-lg font-semibold text-gray-600 mb-1">No orders yet</p>
+                <p class="text-gray-400 text-sm mb-5">Your placed orders will appear here</p>
+                <button class="btn btn-brand px-6" id="ordersContinueBtn">Start Shopping</button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button aria-label="Close">close</button></form>
+    </dialog>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       CART MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <dialog id="cartModal" class="modal" aria-labelledby="cartTitle">
+        <div class="modal-box w-11/12 max-w-4xl max-h-[92vh] overflow-y-auto sc-scroll p-5 sm:p-7">
+            <div class="modal-header">
+                <h2 id="cartTitle" class="text-2xl font-bold brand-font">Shopping Cart</h2>
+                <button class="btn btn-sm btn-circle btn-ghost" id="closeCartModal" aria-label="Close cart">✕</button>
+            </div>
+
+            <div id="modalCartContainer" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Cart items -->
+                <div class="lg:col-span-2">
+                    <div id="modalCartList" class="space-y-3"></div>
+                </div>
+
+                <!-- Order summary -->
+                <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 h-fit lg:sticky lg:top-4">
+                    <h3 class="text-base font-bold brand-font mb-4">Order Summary</h3>
+                    <div class="space-y-2.5 text-sm">
+                        <div class="flex justify-between text-gray-500"><span>Items</span><span id="modalItemsCount" class="font-semibold text-gray-700">0</span></div>
+                        <div class="flex justify-between text-gray-500"><span>Subtotal</span><span id="modalSubtotalText" class="font-semibold text-gray-700">$0.00</span></div>
+                        <div class="flex justify-between text-gray-500"><span>Delivery</span><span id="modalDeliveryText" class="font-semibold text-gray-700">$0.00</span></div>
+                        <div class="border-t border-gray-200 pt-2.5 flex justify-between font-bold text-base">
+                            <span>Total</span><span id="modalTotalText" class="text-blue-600">$0.00</span>
+                        </div>
+                    </div>
+                    <button id="checkoutBtn" class="btn btn-brand w-full mt-5 rounded-xl">Proceed to Checkout</button>
+                    <button id="modalClearCartBtn" class="btn btn-outline w-full mt-2 rounded-xl text-sm">Clear Cart</button>
+                </div>
+            </div>
+
+            <!-- Empty cart -->
+            <div id="emptyCartModal" class="text-center py-16 hidden">
+                <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-cart-shopping text-3xl text-blue-300" aria-hidden="true"></i>
+                </div>
+                <p class="text-lg font-semibold text-gray-600 mb-1">Your cart is empty</p>
+                <p class="text-gray-400 text-sm mb-5">Add some items to get started</p>
+                <button class="btn btn-brand px-6" id="cartContinueBtn">Continue Shopping</button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button aria-label="Close">close</button></form>
+    </dialog>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       CHECKOUT MODAL
+  ═══════════════════════════════════════════════════════ -->
+    <dialog id="checkoutModal" class="modal" aria-labelledby="checkoutTitle">
+        <div class="modal-box w-11/12 max-w-2xl max-h-[92vh] overflow-y-auto sc-scroll p-5 sm:p-7">
+            <div class="modal-header">
+                <h2 id="checkoutTitle" class="text-2xl font-bold brand-font">Checkout</h2>
+                <button class="btn btn-sm btn-circle btn-ghost" id="closeCheckoutModal" aria-label="Close checkout">✕</button>
+            </div>
+
+            <div id="checkoutMessage" class="mb-4 hidden"></div>
+
+            <form id="checkoutForm" class="space-y-5" novalidate>
+
+                <!-- Shipping info -->
+                <fieldset class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                    <legend class="text-base font-bold brand-font px-1 mb-3">Shipping Information</legend>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="form-control sm:col-span-2">
+                            <label class="label pt-0" for="checkoutName"><span class="label-text font-semibold text-sm">Full Name <span class="text-red-500">*</span></span></label>
+                            <input type="text" id="checkoutName" name="name" placeholder="John Doe" class="input input-bordered w-full text-sm rounded-xl" required autocomplete="name" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label pt-0" for="checkoutEmail"><span class="label-text font-semibold text-sm">Email <span class="text-red-500">*</span></span></label>
+                            <input type="email" id="checkoutEmail" name="email" placeholder="john@example.com" class="input input-bordered w-full text-sm rounded-xl" required autocomplete="email" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label pt-0" for="checkoutPhone"><span class="label-text font-semibold text-sm">Phone <span class="text-red-500">*</span></span></label>
+                            <input type="tel" id="checkoutPhone" name="phone" placeholder="+880 1XXX XXXXXX" class="input input-bordered w-full text-sm rounded-xl" required autocomplete="tel" />
+                        </div>
+                        <div class="form-control sm:col-span-2">
+                            <label class="label pt-0" for="checkoutAddress"><span class="label-text font-semibold text-sm">Address <span class="text-red-500">*</span></span></label>
+                            <textarea id="checkoutAddress" name="address" placeholder="123 Main St, City, Country" class="textarea textarea-bordered w-full h-20 text-sm rounded-xl" required autocomplete="street-address"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Payment -->
+                <fieldset class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                    <legend class="text-base font-bold brand-font px-1 mb-3">Payment Method <span class="text-red-500">*</span></legend>
+                    <div class="space-y-2.5">
+                        <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl border border-gray-200 bg-white hover:border-blue-300 transition has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+              <input type="radio" name="paymentMethod" value="COD" class="radio radio-primary radio-sm" checked />
+              <div>
+                <span class="font-semibold text-sm block">Cash on Delivery</span>
+                <span class="text-xs text-gray-400">Pay when you receive</span>
+              </div>
+            </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl border border-gray-200 bg-white hover:border-blue-300 transition has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+              <input type="radio" name="paymentMethod" value="Card" class="radio radio-primary radio-sm" />
+              <div>
+                <span class="font-semibold text-sm block">Credit / Debit Card</span>
+                <span class="text-xs text-gray-400">Demo only</span>
+              </div>
+            </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl border border-gray-200 bg-white hover:border-blue-300 transition has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+              <input type="radio" name="paymentMethod" value="bKash" class="radio radio-primary radio-sm" />
+              <div>
+                <span class="font-semibold text-sm block">bKash Mobile Payment</span>
+                <span class="text-xs text-gray-400">Demo only</span>
+              </div>
+            </label>
+                    </div>
+                </fieldset>
+
+                <!-- Order summary (checkout) -->
+                <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
+                    <h3 class="text-base font-bold brand-font mb-3">Order Summary</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex justify-between"><span>Items</span><span id="checkoutItemsText" class="font-semibold text-gray-800">0</span></div>
+                        <div class="flex justify-between"><span>Subtotal</span><span id="checkoutSubtotalText" class="font-semibold text-gray-800">$0.00</span></div>
+                        <div class="flex justify-between"><span>Delivery</span><span id="checkoutDeliveryText" class="font-semibold text-gray-800">$5.00</span></div>
+                        <div class="border-t border-blue-200 pt-2 flex justify-between font-bold text-base">
+                            <span class="text-gray-700">Grand Total</span>
+                            <span id="checkoutTotalText" class="text-blue-600">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="flex gap-3 mt-5 justify-end">
+                <button id="cancelOrderBtn" class="btn btn-outline rounded-xl">Cancel</button>
+                <button id="confirmOrderBtn" class="btn btn-brand rounded-xl px-7">
+          <i class="fa-solid fa-check mr-1.5" aria-hidden="true"></i>Confirm Order
+        </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button aria-label="Close">close</button></form>
+    </dialog>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+    <footer id="contact" class="site-footer py-12 sm:py-16 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <a href="#home" class="text-2xl font-bold text-blue-500 brand-font flex items-center gap-2 mb-3">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>                        SwiftCart
+                    </a>
+                    <p class="text-slate-400 text-sm leading-6 max-w-xs">
+                        Your one-stop shop for fashion and lifestyle. Quality products, fast delivery, exceptional support.
+                    </p>
+                    <div class="flex gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-white/5 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook-f text-xs" aria-hidden="true"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram text-xs" aria-hidden="true"></i></a>
+                        <a href="#" class="w-8 h-8 bg-white/5 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter text-xs" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h6 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h6>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#home" class="text-slate-400 hover:text-blue-400 transition">Home</a></li>
+                        <li><a href="#products" class="text-slate-400 hover:text-blue-400 transition">Products</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-blue-400 transition">About</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-blue-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h6 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Support</h6>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition">FAQ</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition">Shipping</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition">Returns</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-blue-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h6 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Newsletter</h6>
+                    <p class="text-slate-400 text-sm mb-3">Get deals and new arrivals in your inbox.</p>
+                    <form id="newsletterForm" class="flex flex-col gap-2" novalidate>
+                        <input id="newsletterEmail" type="email" placeholder="your@email.com" class="input input-sm bg-white/5 border-white/10 text-white placeholder:text-slate-500 rounded-lg focus:border-blue-500 w-full" aria-label="Newsletter email" />
+                        <button type="submit" class="btn btn-brand btn-sm w-full rounded-lg">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+                <p>&copy; 2026 SwiftCart. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-blue-400 transition">Terms</a>
+                    <a href="#" class="hover:text-blue-400 transition">Privacy</a>
+                    <a href="#" class="hover:text-blue-400 transition">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
